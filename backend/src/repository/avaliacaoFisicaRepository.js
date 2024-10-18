@@ -6,7 +6,7 @@ export async function adicionarAvaliacao(info){
 
     const comando=  `
 
-insert into db_athenas.tb_avaliacao_fisica (ds_peso, ds_massa_livre_gordura, ds_imc, ds_massa_muscular, ds_frequencia_cardiaca, ds_massa_muscular_esqueletica, ds_indice_coracao, ds_massa_ossea, ds_taxa_muscular, ds_gordura_corporal, ds_idade_metabolica, ds_gordura_subcutanea, ds_taxa_metabolica_basal, ds_gordura_visceral, ds_proteina, ds_agua_corporal)
+insert into AthenasDB.Avaliacao_fisica (ds_peso, ds_massa_livre_gordura, ds_imc, ds_massa_muscular, ds_frequencia_cardiaca, ds_massa_muscular_esqueletica, ds_indice_coracao, ds_massa_ossea, ds_taxa_muscular, ds_gordura_corporal, ds_idade_metabolica, ds_gordura_subcutanea, ds_taxa_metabolica_basal, ds_gordura_visceral, ds_proteina, ds_agua_corporal)
 
 values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
            `
@@ -27,7 +27,7 @@ export async function atualizarAvaliacao(id,info){
     const comando=  `
 
     
-    update db_athenas.tb_avaliacao_fisica
+    update AthenasDB.Avaliacao_fisica
        set  ds_peso= ?,
             ds_massa_livre_gordura=?,
             ds_imc=?,
@@ -78,7 +78,7 @@ export async function atualizarAvaliacao(id,info){
         ds_proteina                      proteina,
         ds_agua_corporal                 aguaCorporal
 
-    from db_athenas.tb_avaliacao_fisica; 
+    from AthenasDB.Avaliacao_fisica; 
                         `
     
      let resposta= await con.query(comando);

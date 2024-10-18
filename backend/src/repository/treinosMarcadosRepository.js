@@ -2,11 +2,14 @@ import con from "./connection.js";
 
 
 
+
+
+
 export async function adicionarTreino(treinos){
 
     const comando=  `
 
-insert into db_athenas.tb_treinos_marcados (ds_objetivos_cliente, dt_treino, ds_exercicios)
+insert into db_athenas.Treinos_marcados (ds_objetivos_cliente, dt_treino, ds_exercicios_escolhidos, bt_concluido)
 values(?,?,?)
            `
 
@@ -24,9 +27,9 @@ export async function consultarTreino(){
         select
                 ds_objetivos_cliente         objetivos,
                 dt_treino                    data,
-                ds_exercicios                exercicios
+                ds_exercicios_escolhidos     exercicios
     
-        from db_athenas.tb_treinos_marcados;
+        from db_athenas.Treinos_marcados;
     
     `
     
@@ -42,10 +45,11 @@ export async function consultarTreino(){
         const comando=  `
     
         
-        update db_athenas.tb_treinos_marcados
+        update db_athenas.Treinos_marcados
                         set ds_objetivos_cliente= ?,
                             dt_treino=?,
-                            ds_exercicios=?
+                            ds_exercicios_escolhidos=?
+                            bt_concluido =?
         where treino_id= ?;
     
                `
@@ -59,7 +63,7 @@ export async function consultarTreino(){
 
             const comando= `
             
-            delete from tb_treinos_marcados
+            delete from Treinos_marcados
                    where treino_id = ?;
                   
                   `
