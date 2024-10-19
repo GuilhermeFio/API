@@ -10,5 +10,4 @@ servidor.use(cors())
 servidor.use(express.json())
 
 AdicionarRotas(servidor)
-
 servidor.listen(process.env.PORTA, () => console.log(`A API SUBIU NA ${process.env.PORTA}` ));

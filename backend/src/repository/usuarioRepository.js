@@ -4,15 +4,15 @@ export async function consultarUsuario(){
 
 const comando= `
            
-select
-nm_usuario,
-ds_email,
-dt_nascimento,
-ds_cidade,
-ds_genero,
-ds_UF,
-img_usuario
-from Usuario;
+ select
+        nm_usuario     nome,
+        ds_email       email,
+        dt_nascimento  nascimento,
+        ds_cidade      cidade,
+        ds_genero      genero,
+        ds_UF          UF,
+        img_usuario    perfil   
+ from Usuario;
 
 `
 
@@ -40,7 +40,7 @@ where id_usuario = ?;
 
            `
 
- let resposta= await con.query(comando, [usuario.nome, usuario.genero, usuario.nascimento, usuario.UF, id]);
+ let resposta= await con.query(comando, [usuario.nome, usuario.genero, usuario.nascimento, usuario.UF, usuario.perfil, id]);
  let registros= resposta[0];
  return registros.affectedRows; 
     }

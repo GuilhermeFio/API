@@ -8,7 +8,7 @@ export async function consultarLogin(){
                 ds_email      email,
                 ds_senha      senha
                 
-          from db_athenas.tb_login;
+          from AthenasDB.Login;
 
                    `
     
