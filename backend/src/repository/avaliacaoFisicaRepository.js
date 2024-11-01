@@ -6,23 +6,24 @@ export async function adicionarAvaliacao(info){
 
     const comando=  `
 
-insert into AthenasDB.Avaliacao_fisica (ds_peso, ds_massa_livre_gordura, ds_imc, ds_massa_muscular, ds_frequencia_cardiaca, ds_massa_muscular_esqueletica, ds_indice_coracao, ds_massa_ossea, ds_taxa_muscular, ds_gordura_corporal, ds_idade_metabolica, ds_gordura_subcutanea, ds_taxa_metabolica_basal, ds_gordura_visceral, ds_proteina, ds_agua_corporal)
+insert into AthenasDB.Avaliacao_fisica (ds_peso, ds_massa_livre_gordura, ds_imc, ds_massa_muscular, ds_frequencia_cardiaca, ds_massa_muscular_esqueletica, ds_indice_coracao, ds_massa_ossea, ds_taxa_muscular, ds_gordura_corporal, ds_idade_metabolica, ds_gordura_subcutanea, ds_taxa_metabolica_basal, ds_gordura_visceral, ds_proteina, ds_agua_corporal, id_login)
 
-values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
            `
 
- let resposta= await con.query(comando, [info.peso, info.massaLivreGordura, info.imc, info.massaMuscular, info.frequenciaCardiaca, info.massaMuscularEsqueletica, info.indiceCoracao, info.massaOssea, info.taxaMuscular, info.gorduraCorporal, info.idadeMetabolica, info.gorduraSubcutanea, info.taxaMetabolicaBassal, info.gorduraVisceral, info.proteina, info.aguaCorporal]);
+ let resposta= await con.query(comando, [info.peso, info.massaLivreGordura, info.imc, info.massaMuscular, info.frequenciaCardiaca, info.massaMuscularEsqueletica, info.indiceCoracao, info.massaOssea, info.taxaMuscular, info.gorduraCorporal, info.idadeMetabolica, info.gorduraSubcutanea, info.taxaMetabolicaBasal, info.gorduraVisceral, info.proteina, info.aguaCorporal, info.idUsuario]);
+
+
 
  let registros= resposta[0];
+ console.log(registros.insertId);
  return registros.insertId;
-    
     }
 
 
 
 
-
-export async function atualizarAvaliacao(id,info){
+/*export async function atualizarAvaliacao(id,info){
 
     const comando=  `
 
@@ -53,7 +54,7 @@ export async function atualizarAvaliacao(id,info){
  let registros= resposta[0];
  return registros.affectedRows;
  
-    }
+    }*/
 
 
     export async function consultarAvaliacao(idCliente){
@@ -80,7 +81,7 @@ export async function atualizarAvaliacao(id,info){
 
     from AthenasDB.Avaliacao_fisica
 
-    inner join Clientes
+    inner join Cliente
     on  AthenasDB.Avaliacao_fisica.avaliacao_id = Cliente.avaliacao_id
     where id_cliente=?; 
                         `
@@ -89,4 +90,4 @@ export async function atualizarAvaliacao(id,info){
      let registros= resposta[0];
      return registros;
         
-        }
+}

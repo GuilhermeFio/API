@@ -4,14 +4,13 @@ export async function inserirCliente(clienteObj){
 
 const comando= `
 
-insert into Cliente(nome, nascimento, idade, telefone, treino_id, avaliacao_id, reavaliacao_id)
-values(?,?,?,?,?,?);
+insert into Cliente(nome, nascimento, idade, telefone, treino_id, avaliacao_id, reavaliacao_id, id_login)
+values(?,?,?,?,?,?,?,?);
 `
 
-let resposta= await con.query(comando, [clienteObj.nome, clienteObj.nascimento, clienteObj.idade, clienteObj.telefone, clienteObj.treinoId, clienteObj.avaliacaoID, clienteObj.reavaliacaoId])
+let resposta= await con.query(comando, [clienteObj.nome, clienteObj.nascimento, clienteObj.idade, clienteObj.telefone, clienteObj.treinoid, clienteObj.avaliacaoid, clienteObj.reavaliacaoid, clienteObj.idUsuario])
 let registros = resposta[0]
 return registros.insertId
-
 }
 
 export async function treinosMarcados(idCliente){
@@ -80,7 +79,22 @@ export async function infoCliente(idCliente){
 
 let resposta= await con.query(comando, [idCliente])
 let registros = resposta[0]
-
 return registros;
+}
+
+export async function atualizarCliente(id, clienteObj){
+
+	const comando = `
+
+	   update Cliente
+	   set nome = ?,
+		   nascimento= ?,
+		   idade = ?,
+		   telefone = ?
+	   where id_cliente = ?;
+`
+let resposta = await con.query(comando, [clienteObj.nome, clienteObj.nascimento, clienteObj.idade, clienteObj.telefone, id])
+let info = resposta[0];
+return info.affectedRows;
 
 }
