@@ -13,7 +13,7 @@ export async function adicionarAvaliacao(info){
     return registros.insertId;
 }
 /*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*export async function atualizarAvaliacao(id,info){
+export async function atualizarAvaliacao(id,info){
     const comando=  `
         update athenasdb.avaliacao_fisica
         set ds_peso= ?,
@@ -39,7 +39,8 @@ export async function adicionarAvaliacao(info){
 
     let registros= resposta[0];
     return registros.affectedRows;
- }*/
+ }
+
 /*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 export async function consultarAvaliacao(idCliente){
     const comando=  `
@@ -69,4 +70,18 @@ export async function consultarAvaliacao(idCliente){
      let resposta= await con.query(comando, [idCliente]);
      let registros= resposta[0];
      return registros;
+}
+
+/*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+
+export async function deletarAvaliacao(id){
+    const comando = `
+    delete from athenasdb.avaliacao_fisica
+    where avaliacao_id = ?
+    `
+
+    let resposta = await con.query(comando,[id])
+    let registros = resposta[0];
+
+    return registros.affectedRows
 }
